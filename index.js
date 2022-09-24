@@ -20,11 +20,10 @@ mongoose
   })
   .then(() => {
     console.log("conect to mongo");
-    app.listen(process.env.PORT || 8000, () => {
+    app.listen(process.env.PORT, () => {
       console.log("Server running...");
     });
   });
-  
 
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors());
