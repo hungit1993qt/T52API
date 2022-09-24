@@ -11,31 +11,34 @@ const PartnerSchema = new mongoose.Schema({
   },
 });
 
-const newsSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const newsSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    publishedDate: {
+      type: String,
+    },
+    descript: {
+      type: String,
+      required: true,
+    },
+    avatar: {
+      type: String,
+      required: true,
+    },
+    newsType: {
+      type: String,
+      required: true,
+    },
+    personPost: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Manager",
+    },
   },
-  publishedDate: {
-    type: String,
-  },
-  descript: {
-    type: String,
-    required: true,
-  },
-  avatar: {
-    type: String,
-    required: true,
-  },
-  newsType: {
-    type: String,
-    required: true,
-  },
-  personPost: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Manager",
-  },
-});
+  { timestamps: true }
+);
 
 const managerSchema = new mongoose.Schema({
   name: {
@@ -74,28 +77,31 @@ const managerSchema = new mongoose.Schema({
   ],
 });
 
-const clientSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const clientSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: Number,
+      required: true,
+    },
+    loanType: {
+      type: String,
+      required: true,
+    },
+    store: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Store",
+    },
+    isLoan: {
+      type: Boolean,
+      required: true,
+    },
   },
-  phone: {
-    type: Number,
-    required: true,
-  },
-  loanType: {
-    type: String,
-    required: true,
-  },
-  store: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Store",
-  },
-  isLoan: {
-    type: Boolean,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
 const StoreSchema = new mongoose.Schema({
   name: {

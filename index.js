@@ -13,9 +13,17 @@ const managerRoute = require("./routes/manager");
 
 dotenv.config();
 // connect database
-mongoose.connect(process.env.MONGODB_URL, () => {
-  console.log("conect to mongo");
-});
+mongoose
+  .connect(process.env.MONGODB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("conect to mongo");
+    app.listen(process.env.PORT || 8000, () => {
+      console.log("Server running...");
+    });
+  });
 
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors());
@@ -27,7 +35,3 @@ app.use("/v1/store/", storeRoute);
 app.use("/v1/partner/", partnerRoute);
 app.use("/v1/news/", newsRoute);
 app.use("/v1/manager/", managerRoute);
-
-app.listen(8000, () => {
-  console.log("Server running...");
-});
