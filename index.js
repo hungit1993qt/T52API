@@ -14,7 +14,7 @@ const managerRoute = require("./routes/manager");
 dotenv.config();
 // connect database
 mongoose
-  .connect(process.env.MONGODB_URL, {
+  .connect(process.env.MONGODB_URL.toString(), {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
