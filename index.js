@@ -24,6 +24,7 @@ mongoose
       console.log("Server running...");
     });
   });
+  
 
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors());
