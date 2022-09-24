@@ -10,6 +10,7 @@ const storeRoute = require("./routes/store");
 const partnerRoute = require("./routes/partner");
 const newsRoute = require("./routes/news");
 const managerRoute = require("./routes/manager");
+const { default: Home } = require("./Home");
 
 dotenv.config();
 // connect database
@@ -30,8 +31,11 @@ app.use(cors());
 app.use(morgan("common"));
 
 //Routs
-app.use("/v1/client/", clientRoute);
-app.use("/v1/store/", storeRoute);
-app.use("/v1/partner/", partnerRoute);
-app.use("/v1/news/", newsRoute);
-app.use("/v1/manager/", managerRoute);
+app.use("/t52/client/", clientRoute);
+app.use("/t52/store/", storeRoute);
+app.use("/t52/partner/", partnerRoute);
+app.use("/t52/news/", newsRoute);
+app.use("/t52/manager/", managerRoute);
+app.use("/", (req, res) => {
+  res.send(<Home />);
+});
