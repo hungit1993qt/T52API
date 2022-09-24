@@ -10,7 +10,6 @@ const storeRoute = require("./routes/store");
 const partnerRoute = require("./routes/partner");
 const newsRoute = require("./routes/news");
 const managerRoute = require("./routes/manager");
-const { default: Home } = require("./Home");
 
 dotenv.config();
 // connect database
@@ -37,5 +36,5 @@ app.use("/t52/partner/", partnerRoute);
 app.use("/t52/news/", newsRoute);
 app.use("/t52/manager/", managerRoute);
 app.use("/", (req, res) => {
-  res.send(<Home />);
+  res.send("Server đang chạy.....");
 });
