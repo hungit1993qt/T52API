@@ -2,6 +2,7 @@ const express = require("express");
 const { engine } = require("express-handlebars");
 const cors = require("cors");
 const app = express();
+const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 const morgan = require("morgan");
@@ -14,6 +15,7 @@ const managerRoute = require("./routes/manager");
 const bannersRoute = require("./routes/banners");
 app.use(express.static(__dirname + "/"));
 dotenv.config();
+app.use(fileUpload());
 // connect database
 mongoose
   .connect(process.env.MONGODB_URL, {

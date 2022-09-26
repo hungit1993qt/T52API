@@ -1,7 +1,16 @@
 const { Banners } = require("../model/model");
+
 const bannersController = {
   addBanners: async (req, res) => {
     try {
+      let sampleFile;
+      let uploadPath;
+      if (!req.files || Object.keys(req.files).length === 0) {
+        return res.status(400).send("No files were uploaded.");
+      }
+      sampleFile = req.files.sampleFile;
+      uploadPath = __dirname + "../public/img" + sampleFile.name;
+      sampleFile.mv(uploadPath);
       const newBanners = new Banners(req.body);
       const savedBanners = await newBanners.save();
       res.status(200).json(savedBanners);
