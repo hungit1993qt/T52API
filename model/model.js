@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+const date = require("date-and-time");
+const now = new Date();
+const value = date.format(now, "YYYY-MM-DD");
 
 const PartnerSchema = new mongoose.Schema({
   name: {
@@ -56,23 +59,24 @@ const newsSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const mediasSchema = new mongoose.Schema(
-  {
-    name: {
-      type: String,
-      required: true,
-    },
-    urlVideo: {
-      type: String,
-      required: true,
-    },
-    personPost: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Manager",
-    },
+const mediasSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
   },
-  { timestamps: true }
-);
+  urlVideo: {
+    type: String,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: value,
+  },
+  personPost: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Manager",
+  },
+});
 
 const managerSchema = new mongoose.Schema({
   name: {

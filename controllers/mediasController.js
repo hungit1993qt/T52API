@@ -37,6 +37,17 @@ const mediasController = {
       res.status(500).json(error);
     }
   },
+  findMediasByDate: async (req, res) => {
+    try {
+   
+      const medias = await Medias.find({
+        createdAt: { $gte: req.params.from, $lte: req.params.to, },
+      }).sort({ createdAt: -1 }).populate("personPost");
+      res.status(200).json(medias);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
   updateMedias: async (req, res) => {
     try {
       const medias = await Medias.findById(req.params.id);
