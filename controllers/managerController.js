@@ -11,7 +11,7 @@ const managerController = {
   },
   getAllManager: async (req, res) => {
     try {
-      const manager = await Manager.find().populate("news");
+      const manager = await Manager.find().populate("news").populate("medias");
       res.status(200).json(manager);
     } catch (error) {
       res.status(500).json(error);
@@ -19,7 +19,7 @@ const managerController = {
   },
   findManager: async (req, res) => {
     try {
-      const manager = await Manager.findById(req.params.id).populate("news");
+      const manager = await Manager.findById(req.params.id).populate("news").populate("medias");
       res.status(200).json(manager);
     } catch (error) {
       res.status(500).json(error);
