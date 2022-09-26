@@ -36,6 +36,18 @@ const clientController = {
       res.status(500).json(error);
     }
   },
+  findClientByDate: async (req, res) => {
+    try {
+      const client = await Client.find({
+        createdAt: { $gte: req.params.from, $lte: req.params.to },
+      })
+        .sort({ createdAt: -1 })
+        .populate("store");
+      res.status(200).json(client);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
   updateClient: async (req, res) => {
     try {
       const client = await Client.findById(req.params.id);

@@ -121,31 +121,32 @@ const managerSchema = new mongoose.Schema({
   ],
 });
 
-const clientSchema = new mongoose.Schema(
-  {
-    name: {
-      type: String,
-      required: true,
-    },
-    phone: {
-      type: Number,
-      required: true,
-    },
-    loanType: {
-      type: String,
-      required: true,
-    },
-    store: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Store",
-    },
-    isLoan: {
-      type: Boolean,
-      required: true,
-    },
+const clientSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
   },
-  { timestamps: true }
-);
+  phone: {
+    type: Number,
+    required: true,
+  },
+  loanType: {
+    type: String,
+    required: true,
+  },
+  store: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Store",
+  },
+  isLoan: {
+    type: Boolean,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: value,
+  },
+});
 
 const StoreSchema = new mongoose.Schema({
   name: {
