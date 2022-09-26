@@ -2,13 +2,7 @@ const { Manager, Medias } = require("../model/model");
 const mediasController = {
   addMedias: async (req, res) => {
     try {
-      const newMedias = new Medias({
-        name: req.body.name,
-        personPost: req.body.personPost,
-      });
-      if (req.file) {
-        newMedias.urlVideo = req.file.path;
-      }
+      const newMedias = new Medias(req.body);
       const savedMedias = await newMedias.save();
       if (req.body.personPost) {
         const manager = Manager.findById(req.body.personPost);
