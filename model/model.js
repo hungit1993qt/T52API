@@ -11,13 +11,24 @@ const PartnerSchema = new mongoose.Schema({
   },
 });
 
+const bannersSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  img: {
+    type: String,
+    required: true,
+  },
+});
+
 const newsSchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
     },
-   
+
     descript: {
       type: String,
       required: true,
@@ -139,6 +150,7 @@ const StoreSchema = new mongoose.Schema({
     },
   ],
 });
+let Banners = mongoose.model("Banners", bannersSchema);
 let Store = mongoose.model("Store", StoreSchema);
 let Manager = mongoose.model("Manager", managerSchema);
 let Partner = mongoose.model("Partner", PartnerSchema);
