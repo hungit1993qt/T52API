@@ -11,16 +11,19 @@ const PartnerSchema = new mongoose.Schema({
   },
 });
 
-const bannersSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const bannersSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    img: {
+      type: String,
+      required: true,
+    },
   },
-  img: {
-    type: String,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
 const newsSchema = new mongoose.Schema(
   {
