@@ -146,6 +146,10 @@ const StoreSchema = new mongoose.Schema({
       required: true,
     },
   },
+  idMap: {
+    type: String,
+    required: true,
+  },
   clients: [
     {
       type: mongoose.Schema.Types.ObjectId,
