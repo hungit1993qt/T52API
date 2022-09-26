@@ -11,7 +11,7 @@ const partnerController = {
   },
   getAllPartner: async (req, res) => {
     try {
-      const store = await Partner.find();
+      const store = await Partner.find().sort({ createdAt: -1 });
       res.status(200).json(store);
     } catch (error) {
       res.status(500).json(error);
