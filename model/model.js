@@ -157,4 +157,4 @@ let Partner = mongoose.model("Partner", PartnerSchema);
 let News = mongoose.model("News", newsSchema);
 let Client = mongoose.model("Client", clientSchema);
 
-module.exports = { Store, Manager, Partner, News, Client };
+module.exports = { Store, Manager, Partner, News, Client, Banners };
