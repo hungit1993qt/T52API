@@ -17,10 +17,12 @@ const newsSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    publishedDate: {
-      type: String,
-    },
+   
     descript: {
+      type: String,
+      required: true,
+    },
+    content: {
       type: String,
       required: true,
     },
