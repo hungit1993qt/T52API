@@ -19,7 +19,13 @@ const partnerController = {
   },
   findPartner: async (req, res) => {
     try {
-      const store = await Partner.findById(req.params.id);
+      const store = await Partner.find({
+        $or: [
+          {
+            name: { $regex: req.params.key },
+          },
+        ],
+      });
       res.status(200).json(store);
     } catch (error) {
       res.status(500).json(error);

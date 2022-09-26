@@ -24,7 +24,13 @@ const clientController = {
   },
   findClient: async (req, res) => {
     try {
-      const client = await Client.findById(req.params.id).populate("store");
+      const client = await Client.find({
+        $or: [
+          {
+            name: { $regex: req.params.key },
+          },
+        ],
+      }).populate("store");
       res.status(200).json(client);
     } catch (error) {
       res.status(500).json(error);

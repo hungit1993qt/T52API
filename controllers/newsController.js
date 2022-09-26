@@ -28,7 +28,13 @@ const NewsController = {
   },
   findNews: async (req, res) => {
     try {
-      const news = await News.findById(req.params.id).populate("personPost");
+      const news = await News.find({
+        $or: [
+          {
+            name: { $regex: req.params.key },
+          },
+        ],
+      }).populate("personPost");
       res.status(200).json(news);
     } catch (error) {
       res.status(500).json(error);

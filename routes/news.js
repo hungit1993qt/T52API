@@ -4,7 +4,7 @@ const uploadPicture = require("../middleware/uploadPicture");
 
 router.post("/", uploadPicture.single("img"), newsController.addNews);
 router.get("/", newsController.getAllNews);
-router.get("/:id", newsController.findNews);
+router.get("/:key", newsController.findNews);
 router.put("/:id", newsController.updateNews);
 router.delete("/:id", newsController.deleteNews);
 module.exports = router;

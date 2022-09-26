@@ -25,9 +25,13 @@ const mediasController = {
   },
   findMedias: async (req, res) => {
     try {
-      const medias = await Medias.findById(req.params.id).populate(
-        "personPost"
-      );
+      const medias = await Medias.find({
+        $or: [
+          {
+            name: { $regex: req.params.key },
+          },
+        ],
+      }).populate("personPost");
       res.status(200).json(medias);
     } catch (error) {
       res.status(500).json(error);

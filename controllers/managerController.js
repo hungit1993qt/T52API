@@ -19,7 +19,15 @@ const managerController = {
   },
   findManager: async (req, res) => {
     try {
-      const manager = await Manager.findById(req.params.id).populate("news").populate("medias");
+      const manager = await Manager.find({
+        $or: [
+          {
+            name: { $regex: req.params.key },
+          },
+        ],
+      })
+        .populate("news")
+        .populate("medias");
       res.status(200).json(manager);
     } catch (error) {
       res.status(500).json(error);

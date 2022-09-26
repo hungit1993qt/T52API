@@ -20,7 +20,13 @@ const storeController = {
   },
   findStore: async (req, res) => {
     try {
-      const store = await Store.findById(req.params.id).populate("clients");
+      const store = await Store.find({
+        $or: [
+          {
+            name: { $regex: req.params.key },
+          },
+        ],
+      }).populate("clients");
       res.status(200).json(store);
     } catch (error) {
       res.status(500).json(error);

@@ -9,7 +9,6 @@ const bannersController = {
       });
       if (req.file) {
         newBanners.img = req.file.path;
-       
       }
       const savedBanners = await newBanners.save();
       res.status(200).json(savedBanners);
@@ -27,7 +26,13 @@ const bannersController = {
   },
   findBanners: async (req, res) => {
     try {
-      const banners = await Banners.findById(req.params.id);
+      const banners = await Banners.find({
+        $or: [
+          {
+            name: { $regex: req.params.key },
+          },
+        ],
+      });
       res.status(200).json(banners);
     } catch (error) {
       res.status(500).json(error);
