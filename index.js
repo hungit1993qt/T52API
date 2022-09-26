@@ -2,7 +2,6 @@ const express = require("express");
 const { engine } = require("express-handlebars");
 const cors = require("cors");
 const app = express();
-const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 const morgan = require("morgan");
@@ -11,11 +10,12 @@ const clientRoute = require("./routes/client");
 const storeRoute = require("./routes/store");
 const partnerRoute = require("./routes/partner");
 const newsRoute = require("./routes/news");
+const mediasRoute = require("./routes/medias");
 const managerRoute = require("./routes/manager");
 const bannersRoute = require("./routes/banners");
+
 app.use(express.static(__dirname + "/"));
 dotenv.config();
-app.use(fileUpload());
 // connect database
 mongoose
   .connect(process.env.MONGODB_URL, {
@@ -46,5 +46,6 @@ app.use("/t52/client/", clientRoute);
 app.use("/t52/store/", storeRoute);
 app.use("/t52/partner/", partnerRoute);
 app.use("/t52/news/", newsRoute);
+app.use("/t52/medias/", mediasRoute);
 app.use("/t52/manager/", managerRoute);
 app.use("/t52/banners/", bannersRoute);

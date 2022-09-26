@@ -3,6 +3,9 @@ const NewsController = {
   addNews: async (req, res) => {
     try {
       const news = new News(req.body);
+      if (req.file) {
+        news.img = req.file.path;
+      }
       const savedNews = await news.save();
       if (req.body.personPost) {
         const manager = Manager.findById(req.body.personPost);

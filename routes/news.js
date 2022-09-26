@@ -1,7 +1,8 @@
 const newsController = require("../controllers/newsController");
 const router = require("express").Router();
+const uploadPicture = require("../middleware/uploadPicture");
 
-router.post("/", newsController.addNews);
+router.post("/", uploadPicture.single("img"), newsController.addNews);
 router.get("/", newsController.getAllNews);
 router.get("/:id", newsController.findNews);
 router.put("/:id", newsController.updateNews);

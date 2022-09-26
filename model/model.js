@@ -40,11 +40,29 @@ const newsSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    avatar: {
+    img: {
       type: String,
       required: true,
     },
     newsType: {
+      type: String,
+      required: true,
+    },
+    personPost: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Manager",
+    },
+  },
+  { timestamps: true }
+);
+
+const mediasSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    urlVideo: {
       type: String,
       required: true,
     },
@@ -89,6 +107,12 @@ const managerSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "News",
+    },
+  ],
+  medias: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Medias",
     },
   ],
 });
@@ -157,6 +181,7 @@ const StoreSchema = new mongoose.Schema({
     },
   ],
 });
+let Medias = mongoose.model("Medias", mediasSchema);
 let Banners = mongoose.model("Banners", bannersSchema);
 let Store = mongoose.model("Store", StoreSchema);
 let Manager = mongoose.model("Manager", managerSchema);
@@ -164,4 +189,4 @@ let Partner = mongoose.model("Partner", PartnerSchema);
 let News = mongoose.model("News", newsSchema);
 let Client = mongoose.model("Client", clientSchema);
 
-module.exports = { Store, Manager, Partner, News, Client, Banners };
+module.exports = { Store, Manager, Partner, News, Client, Banners, Medias };
