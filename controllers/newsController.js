@@ -15,7 +15,9 @@ const NewsController = {
   },
   getAllNews: async (req, res) => {
     try {
-      const news = await News.find().populate("personPost");
+      const news = await News.find()
+        .sort({ createdAt: -1 })
+        .populate("personPost");
       res.status(500).json(news);
     } catch (error) {
       res.status(500).json(error);
