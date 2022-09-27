@@ -38,11 +38,14 @@ const clientController = {
   },
   findClientByDate: async (req, res) => {
     try {
+      console.log(req.params.from, req.params.to, req.params.name);
       const client = await Client.find({
         createdAt: { $gte: req.params.from, $lte: req.params.to },
+        "store.name": { $eq: "T55" },
       })
         .sort({ createdAt: -1 })
         .populate("store");
+
       res.status(200).json(client);
     } catch (error) {
       res.status(500).json(error);
