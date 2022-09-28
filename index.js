@@ -46,38 +46,39 @@ app.get("/", (req, res) => {
 });
 
 //Routs
-app.use(
-  "/t52/client/",
-  verifyToken.verifyTokenAPI,
-  clientRoute
-);
+app.use("/t52/client/", verifyToken.verifyTokenAPI, clientRoute);
 app.use(
   "/t52/store/",
   verifyToken.verifyTokenAPI,
+  verifyToken.verifyTokenManager,
   storeRoute
 );
 app.use(
   "/t52/partner/",
   verifyToken.verifyTokenAPI,
+  verifyToken.verifyTokenManager,
   partnerRoute
 );
 app.use(
   "/t52/news/",
   verifyToken.verifyTokenAPI,
+  verifyToken.verifyTokenManager,
   newsRoute
 );
 app.use(
   "/t52/medias/",
   verifyToken.verifyTokenAPI,
+  verifyToken.verifyTokenManager,
   mediasRoute
 );
 app.use(
   "/t52/manager/",
-  verifyToken.verifyTokenAPI,
+
   managerRoute
 );
 app.use(
   "/t52/banners/",
   verifyToken.verifyTokenAPI,
+  verifyToken.verifyTokenManager,
   bannersRoute
 );
