@@ -14,7 +14,7 @@ const newsRoute = require("./routes/news");
 const mediasRoute = require("./routes/medias");
 const managerRoute = require("./routes/manager");
 const bannersRoute = require("./routes/banners");
-const verifyTokenAPI = require("./middleware/verifyTokenAPI");
+const verifyToken = require("./middleware/verifyToken");
 
 app.use(express.static(__dirname + "/"));
 dotenv.config();
@@ -48,36 +48,36 @@ app.get("/", (req, res) => {
 //Routs
 app.use(
   "/t52/client/",
-  verifyTokenAPI.verifyTokenAPIMiddleware,
+  verifyToken.verifyTokenAPI,
   clientRoute
 );
 app.use(
   "/t52/store/",
-  verifyTokenAPI.verifyTokenAPIMiddleware,
+  verifyToken.verifyTokenAPI,
   storeRoute
 );
 app.use(
   "/t52/partner/",
-  verifyTokenAPI.verifyTokenAPIMiddleware,
+  verifyToken.verifyTokenAPI,
   partnerRoute
 );
 app.use(
   "/t52/news/",
-  verifyTokenAPI.verifyTokenAPIMiddleware,
+  verifyToken.verifyTokenAPI,
   newsRoute
 );
 app.use(
   "/t52/medias/",
-  verifyTokenAPI.verifyTokenAPIMiddleware,
+  verifyToken.verifyTokenAPI,
   mediasRoute
 );
 app.use(
   "/t52/manager/",
-  verifyTokenAPI.verifyTokenAPIMiddleware,
+  verifyToken.verifyTokenAPI,
   managerRoute
 );
 app.use(
   "/t52/banners/",
-  verifyTokenAPI.verifyTokenAPIMiddleware,
+  verifyToken.verifyTokenAPI,
   bannersRoute
 );
