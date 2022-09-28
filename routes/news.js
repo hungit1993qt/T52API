@@ -1,10 +1,28 @@
 const newsController = require("../controllers/newsController");
 const router = require("express").Router();
 const uploadPicture = require("../middleware/uploadPicture");
+const verifyToken = require("../middleware/verifyToken");
 
-router.post("/", uploadPicture.single("img"), newsController.addNews);
+router.post(
+  "/",
+  verifyToken.verifyTokenAPI,
+  verifyToken.verifyTokenManager,
+  upload.single("img"),
+  newsController.addNews
+);
 router.get("/", newsController.getAllNews);
 router.get("/:key", newsController.findNews);
-router.put("/:id", newsController.updateNews);
-router.delete("/:id", newsController.deleteNews);
+router.put(
+  "/:id",
+  verifyToken.verifyTokenAPI,
+  verifyToken.verifyTokenManager,
+  upload.single("img"),
+  newsController.updateNews
+);
+router.delete(
+  "/:id",
+  verifyToken.verifyTokenAPI,
+  verifyToken.verifyTokenManager,
+  newsController.deleteNews
+);
 module.exports = router;
