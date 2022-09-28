@@ -42,6 +42,14 @@ const NewsController = {
       res.status(500).json(error);
     }
   },
+  findNewsDetail: async (req, res) => {
+    try {
+      const news = await News.findById(req.params.id).populate("personPost");
+      res.status(200).json(news);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
   updateNews: async (req, res) => {
     try {
       const news = await News.findById(req.params.id);
