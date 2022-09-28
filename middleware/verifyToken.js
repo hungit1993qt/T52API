@@ -25,13 +25,12 @@ const verifyToken = {
       }
     });
   },
-  verifyTokenAPI: (req, res, next,manager) => {
+  verifyTokenAPI: (req, res, next) => {
     const token = req.headers.token;
     console.log(token);
     if (token) {
       const accessToken = token.split(" ")[1];
       if (accessToken == process.env.VERIFY_TOKEN) {
-        req.manager = manager;
         next();
       } else {
         res.status(403).json("Token không đúng");
