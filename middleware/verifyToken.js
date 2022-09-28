@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const verifyToken = {
-  verifyTokenMiddleware: (req, res, next) => {
+  verifyTokenManager: (req, res, next) => {
     const token = req.headers.token;
     if (token) {
       const accessToken = token.split(" ")[1];
@@ -14,6 +14,15 @@ const verifyToken = {
     } else {
       res.status(401).json("Bạn chưa xác thực bằng token");
     }
+  },
+  verifyTokenAdmin: (req, res, next) => {
+    verifyToken.verifyTokenManager(req, res, () => {
+      if(req.manager.id == req.params.id || req.manager.admin){
+        next();
+      }else{
+        res.status(403).json("Bạn không phải là Admin");
+      }
+    });
   },
   verifyTokenAPI: (req, res, next) => {
     const token = req.headers.token;

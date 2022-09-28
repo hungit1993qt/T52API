@@ -1,4 +1,5 @@
 const { Manager, News } = require("../model/model");
+const uploadPicture = require("../middleware/uploadPicture");
 const NewsController = {
   addNews: async (req, res) => {
     try {
@@ -6,11 +7,13 @@ const NewsController = {
       if (req.file) {
         news.img = req.file.path;
       }
+       uploadPicture.single("img")
       const savedNews = await news.save();
       if (req.body.personPost) {
         const manager = Manager.findById(req.body.personPost);
         await manager.updateOne({ $push: { news: savedNews._id } });
       }
+
       res.status(200).json(savedNews);
     } catch (error) {
       res.status(500).json(error);
