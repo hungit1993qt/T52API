@@ -1,11 +1,10 @@
 const { Manager, News } = require("../model/model");
-const uploadPicture = require("../middleware/uploadPicture");
 const NewsController = {
   addNews: async (req, res) => {
     try {
       const news = new News(req.body);
       if (req.file) {
-        news.img = req.file.path;
+        news.img = "https://t52-loan-nodejs.herokuapp.com/" + req.file.path;
       }
 
       const savedNews = await news.save();
