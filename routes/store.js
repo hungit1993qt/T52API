@@ -9,8 +9,8 @@ router.post(
   verifyToken.verifyTokenManager,
   storeController.addStore
 );
-router.get("/", storeController.getAllStore);
-router.get("/:key", storeController.findStore);
+router.get("/", verifyToken.verifyTokenAPI,storeController.getAllStore);
+router.get("/:key", verifyToken.verifyTokenAPI,storeController.findStore);
 router.put(
   "/:id",
   verifyToken.verifyTokenAPI,

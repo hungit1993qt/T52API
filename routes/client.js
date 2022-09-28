@@ -9,9 +9,9 @@ router.post(
   verifyToken.verifyTokenManager,
   clientController.addClient
 );
-router.get("/", clientController.getAllClient);
-router.get("/:key", clientController.findClient);
-router.get("/:from/:to", clientController.findClientByDate);
+router.get("/",verifyToken.verifyTokenAPI, clientController.getAllClient);
+router.get("/:key",verifyToken.verifyTokenAPI, clientController.findClient);
+router.get("/:from/:to",verifyToken.verifyTokenAPI, clientController.findClientByDate);
 router.put(
   "/:id",
   verifyToken.verifyTokenAPI,

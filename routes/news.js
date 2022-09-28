@@ -10,8 +10,8 @@ router.post(
   upload.single("img"),
   newsController.addNews
 );
-router.get("/", newsController.getAllNews);
-router.get("/:key", newsController.findNews);
+router.get("/",verifyToken.verifyTokenAPI, newsController.getAllNews);
+router.get("/:key",verifyToken.verifyTokenAPI, newsController.findNews);
 router.put(
   "/:id",
   verifyToken.verifyTokenAPI,

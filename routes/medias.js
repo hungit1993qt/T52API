@@ -8,9 +8,9 @@ router.post(
   verifyToken.verifyTokenManager,
   mediasController.addMedias
 );
-router.get("/", mediasController.getAllMedias);
-router.get("/:key", mediasController.findMedias);
-router.get("/:from/:to", mediasController.findMediasByDate);
+router.get("/", verifyToken.verifyTokenAPI,mediasController.getAllMedias);
+router.get("/:key", verifyToken.verifyTokenAPI,mediasController.findMedias);
+router.get("/:from/:to",verifyToken.verifyTokenAPI, mediasController.findMediasByDate);
 router.put(
   "/:id",
   verifyToken.verifyTokenAPI,

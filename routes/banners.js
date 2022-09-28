@@ -11,8 +11,8 @@ router.post(
   upload.single("img"),
   bannersController.addBanners
 );
-router.get("/", bannersController.getAllBanners);
-router.get("/:key", bannersController.findBanners);
+router.get("/",verifyToken.verifyTokenAPI, bannersController.getAllBanners);
+router.get("/:key",verifyToken.verifyTokenAPI, bannersController.findBanners);
 router.put(
   "/:id",
   verifyToken.verifyTokenAPI,

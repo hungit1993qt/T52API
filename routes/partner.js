@@ -10,8 +10,8 @@ router.post(
   uploadPicture.single("img"),
   partnerController.addPartner
 );
-router.get("/", partnerController.getAllPartner);
-router.get("/:key", partnerController.findPartner);
+router.get("/", verifyToken.verifyTokenAPI,partnerController.getAllPartner);
+router.get("/:key", verifyToken.verifyTokenAPI,partnerController.findPartner);
 router.put(
   "/:id",
   verifyToken.verifyTokenAPI,
