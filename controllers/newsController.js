@@ -7,7 +7,7 @@ const NewsController = {
       if (req.file) {
         news.img = req.file.path;
       }
-       uploadPicture.single("img")
+
       const savedNews = await news.save();
       if (req.body.personPost) {
         const manager = Manager.findById(req.body.personPost);
