@@ -1,6 +1,6 @@
 const managerController = require("../controllers/managerController");
 const router = require("express").Router();
-
+router.post("/login", managerController.login);
 router.post("/", managerController.addManager);
 router.get("/", managerController.getAllManager);
 router.get("/:key", managerController.findManager);

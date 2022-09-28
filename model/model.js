@@ -78,48 +78,60 @@ const mediasSchema = new mongoose.Schema({
   },
 });
 
-const managerSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  phone: {
-    type: Number,
-    required: true,
-  },
-  dateOfBirth: {
-    type: String,
-    required: true,
-  },
-  address: {
-    type: String,
-    required: true,
-  },
-  type: {
-    type: String,
-    required: true,
-  },
-  news: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "News",
+const managerSchema = new mongoose.Schema(
+  {
+    account: {
+      type: String,
+      required: true,
+      minlength: 6,
+      maxlength: 20,
+      unique: true,
     },
-  ],
-  medias: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Medias",
+    name: {
+      type: String,
+      required: true,
     },
-  ],
-});
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: 6,
+    },
+    phone: {
+      type: Number,
+      required: true,
+    },
+    dateOfBirth: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    admin: {
+      type: Boolean,
+      default: false,
+    },
+    news: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "News",
+      },
+    ],
+    medias: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Medias",
+      },
+    ],
+  },
+  { timestamps: true }
+);
 
 const clientSchema = new mongoose.Schema({
   name: {

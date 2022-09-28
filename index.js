@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
 const clientRoute = require("./routes/client");
 const storeRoute = require("./routes/store");
 const partnerRoute = require("./routes/partner");
@@ -13,10 +14,12 @@ const newsRoute = require("./routes/news");
 const mediasRoute = require("./routes/medias");
 const managerRoute = require("./routes/manager");
 const bannersRoute = require("./routes/banners");
+const verifyTokenAPI = require("./middleware/verifyTokenAPI");
 
 app.use(express.static(__dirname + "/"));
 dotenv.config();
 // connect database
+
 mongoose
   .connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
@@ -31,6 +34,7 @@ mongoose
 
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cors());
+app.use(cookieParser());
 app.use(morgan("common"));
 
 //Template engine
@@ -42,10 +46,38 @@ app.get("/", (req, res) => {
 });
 
 //Routs
-app.use("/t52/client/", clientRoute);
-app.use("/t52/store/", storeRoute);
-app.use("/t52/partner/", partnerRoute);
-app.use("/t52/news/", newsRoute);
-app.use("/t52/medias/", mediasRoute);
-app.use("/t52/manager/", managerRoute);
-app.use("/t52/banners/", bannersRoute);
+app.use(
+  "/t52/client/",
+  verifyTokenAPI.verifyTokenAPIMiddleware,
+  clientRoute
+);
+app.use(
+  "/t52/store/",
+  verifyTokenAPI.verifyTokenAPIMiddleware,
+  storeRoute
+);
+app.use(
+  "/t52/partner/",
+  verifyTokenAPI.verifyTokenAPIMiddleware,
+  partnerRoute
+);
+app.use(
+  "/t52/news/",
+  verifyTokenAPI.verifyTokenAPIMiddleware,
+  newsRoute
+);
+app.use(
+  "/t52/medias/",
+  verifyTokenAPI.verifyTokenAPIMiddleware,
+  mediasRoute
+);
+app.use(
+  "/t52/manager/",
+  verifyTokenAPI.verifyTokenAPIMiddleware,
+  managerRoute
+);
+app.use(
+  "/t52/banners/",
+  verifyTokenAPI.verifyTokenAPIMiddleware,
+  bannersRoute
+);
