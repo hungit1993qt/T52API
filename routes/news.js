@@ -1,6 +1,6 @@
 const newsController = require("../controllers/newsController");
 const router = require("express").Router();
-const uploadPicture = require("../middleware/uploadPicture");
+const upload = require("../middleware/uploadPicture");
 const verifyToken = require("../middleware/verifyToken");
 
 router.post(
