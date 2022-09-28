@@ -32,6 +32,14 @@ const storeController = {
       res.status(500).json(error);
     }
   },
+  findStoreDetail: async (req, res) => {
+    try {
+      const store = await Store.findById(req.params.id).populate("clients");
+      res.status(200).json(store);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
   updateStore: async (req, res) => {
     try {
       const store = await Store.findById(req.params.id);

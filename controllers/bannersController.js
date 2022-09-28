@@ -37,6 +37,14 @@ const bannersController = {
       res.status(500).json(error);
     }
   },
+  findBannersDetail: async (req, res) => {
+    try {
+      const banners = await Banners.findById(req.params.id);
+      res.status(200).json(banners);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
   updateBanners: async (req, res) => {
     try {
       const banners = await Banners.findById(req.params.id);

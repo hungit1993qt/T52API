@@ -4,7 +4,8 @@ const partnerController = {
     try {
       const newPartner = new Partner(req.body);
       if (req.file) {
-        newPartner.img = "https://t52-loan-nodejs.herokuapp.com/" + req.file.path;
+        newPartner.img =
+          "https://t52-loan-nodejs.herokuapp.com/" + req.file.path;
       }
       const savedPartner = await newPartner.save();
       res.status(200).json(savedPartner);
@@ -29,6 +30,14 @@ const partnerController = {
           },
         ],
       });
+      res.status(200).json(store);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  findPartnerDetail: async (req, res) => {
+    try {
+      const store = await Partner.findById(req.params.id);
       res.status(200).json(store);
     } catch (error) {
       res.status(500).json(error);

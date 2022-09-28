@@ -11,6 +11,7 @@ router.post(
 );
 router.get("/", verifyToken.verifyTokenAPI, storeController.getAllStore);
 router.get("/:key", verifyToken.verifyTokenAPI, storeController.findStore);
+router.get("/detail/:id", verifyToken.verifyTokenAPI, storeController.findStoreDetail);
 router.put(
   "/:id",
   verifyToken.verifyTokenAPI,

@@ -12,7 +12,7 @@ router.post(
 );
 router.get("/", verifyToken.verifyTokenAPI, newsController.getAllNews);
 router.get("/:key", verifyToken.verifyTokenAPI, newsController.findNews);
-router.get("/:id", verifyToken.verifyTokenAPI, newsController.findNewsDetail);
+router.get("/detail/:id", verifyToken.verifyTokenAPI, newsController.findNewsDetail);
 router.put(
   "/:id",
   verifyToken.verifyTokenAPI,

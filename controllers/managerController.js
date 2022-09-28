@@ -45,6 +45,16 @@ const managerController = {
       res.status(500).json(error);
     }
   },
+  findManagerDetail: async (req, res) => {
+    try {
+      const manager = await Manager.findById(req.params.id)
+        .populate("news")
+        .populate("medias");
+      res.status(200).json(manager);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
   updateManager: async (req, res) => {
     try {
       const manager = await Manager.findById(req.params.id);
@@ -88,7 +98,7 @@ const managerController = {
           process.env.JWT_ACCESS_KEY,
           { expiresIn: "30d" }
         );
-        const { _id,password, ...others } = manager._doc;
+        const { _id, password, ...others } = manager._doc;
         res.status(200).json({ ...others, accessToken });
       }
     } catch (error) {

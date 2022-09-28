@@ -12,6 +12,7 @@ router.post(
 );
 router.get("/", verifyToken.verifyTokenAPI, partnerController.getAllPartner);
 router.get("/:key", verifyToken.verifyTokenAPI, partnerController.findPartner);
+router.get("/detail/:id", verifyToken.verifyTokenAPI, partnerController.findPartnerDetail);
 router.put(
   "/:id",
   verifyToken.verifyTokenAPI,

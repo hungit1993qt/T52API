@@ -36,6 +36,14 @@ const clientController = {
       res.status(500).json(error);
     }
   },
+  findClientDetail: async (req, res) => {
+    try {
+      const client = await Client.findById(req.params.id).populate("store");
+      res.status(200).json(client);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
   findClientByDate: async (req, res) => {
     try {
       console.log(req.params.from, req.params.to, req.params.name);

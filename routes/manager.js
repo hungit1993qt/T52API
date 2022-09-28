@@ -20,6 +20,12 @@ router.get(
   verifyToken.verifyTokenAdmin,
   managerController.findManager
 );
+router.get(
+  "/detail/:id",
+  verifyToken.verifyTokenAPI,
+  verifyToken.verifyTokenAdmin,
+  managerController.findManagerDetail
+);
 router.put(
   "/:id",
   verifyToken.verifyTokenAPI,
