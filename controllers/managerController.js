@@ -34,7 +34,7 @@ const managerController = {
       const manager = await Manager.find({
         $or: [
           {
-            name: { $regex: req.params.key },
+            account: { $regex: req.params.key },
           },
         ],
       })
