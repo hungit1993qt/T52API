@@ -4,7 +4,7 @@ const partnerController = {
     try {
       const newPartner = new Partner(req.body);
       if (req.file) {
-        news.img = "https://t52-loan-nodejs.herokuapp.com/" + req.file.path;
+        newPartner.img = "https://t52-loan-nodejs.herokuapp.com/" + req.file.path;
       }
       const savedPartner = await newPartner.save();
       res.status(200).json(savedPartner);
