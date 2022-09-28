@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const verifyToken = {
   verifyTokenManager: (req, res, next) => {
     const tokenAuths = req.headers[`tokenauth`];
-    console.log(tokenAuths);
+    
     if (tokenAuths) {
       const accessToken = tokenAuths.split(" ")[1];
       jwt.verify(accessToken, process.env.JWT_ACCESS_KEY, (err, manager) => {
@@ -27,7 +27,7 @@ const verifyToken = {
   },
   verifyTokenAPI: (req, res, next) => {
     const token = req.headers.token;
-    console.log(token);
+    
     if (token) {
       const accessToken = token.split(" ")[1];
       if (accessToken == process.env.VERIFY_TOKEN) {
