@@ -2,13 +2,12 @@ const { Banners } = require("../model/model");
 const bannersController = {
   addBanners: async (req, res) => {
     try {
-      if (req.file) {
-      }
+      
       const newBanners = new Banners({
         name: req.body.name,
       });
       if (req.file) {
-        newBanners.img = req.file.path;
+        newBanners.img = "https://t52-loan-nodejs.herokuapp.com/" + req.file.path;
       }
       const savedBanners = await newBanners.save();
       res.status(200).json(savedBanners);
