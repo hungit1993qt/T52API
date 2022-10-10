@@ -17,7 +17,7 @@ sequelize
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-db.products = require("./productModel.js")(sequelize, DataTypes);
+db.products = require("./model")(sequelize, DataTypes);
 db.sequelize.sync({ force: false }).then(() => {
   console.log("yes done");
 });

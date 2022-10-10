@@ -1,209 +1,233 @@
-const mongoose = require("mongoose");
-const date = require("date-and-time");
-const now = new Date();
-const value = date.format(now, "YYYY-MM-DD");
+const sequelize = require("sequelize");
 
-const PartnerSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  img: {
-    type: String,
-    required: true,
-  },
-});
-
-const bannersSchema = new mongoose.Schema(
-  {
-    name: {
-      type: String,
-      required: true,
-    },
-    img: {
-      type: String,
-      required: true,
-    },
-  },
-  { timestamps: true }
-);
-
-const newsSchema = new mongoose.Schema(
-  {
-    name: {
-      type: String,
-      required: true,
-    },
-
-    descript: {
-      type: String,
-      required: true,
-    },
-    content: {
-      type: String,
-      required: true,
-    },
-    img: {
-      type: String,
-      required: true,
-    },
-    newsType: {
-      type: String,
-      required: true,
-    },
-    personPost: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Manager",
-    },
-  },
-  { timestamps: true }
-);
-
-const mediasSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  urlVideo: {
-    type: String,
-    required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: value,
-  },
-  personPost: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Manager",
-  },
-});
-
-const managerSchema = new mongoose.Schema(
-  {
-    account: {
-      type: String,
-      required: true,
-      minlength: 6,
-      maxlength: 20,
-      unique: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-      minlength: 6,
-    },
-    phone: {
-      type: Number,
-      required: true,
-    },
-    dateOfBirth: {
-      type: String,
-      required: true,
-    },
-    address: {
-      type: String,
-      required: true,
-    },
-    admin: {
-      type: Boolean,
-      default: false,
-    },
-    news: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "News",
-      },
-    ],
-    medias: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Medias",
-      },
-    ],
-  },
-  { timestamps: true }
-);
-
-const clientSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  phone: {
-    type: Number,
-    required: true,
-  },
-  loanType: {
-    type: String,
-    required: true,
-  },
-  store: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Store",
-  },
-  isLoan: {
-    type: Boolean,
-    required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: value,
-  },
-});
-
-const StoreSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  phone: {
-    type: Number,
-    required: true,
-  },
-  address: {
-    name: {
-      type: String,
-      required: true,
-    },
-    district: {
-      type: String,
-      required: true,
-    },
-    province: {
-      type: String,
-      required: true,
-    },
-  },
-  idMap: {
-    type: String,
-    required: true,
-  },
-  clients: [
+module.exports = (sequelize, DataTypes) => {
+  const Partner = sequelize.define(
+    "Partner",
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Client",
+      // Model attributes are defined here
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      img: {
+        type: DataTypes.STRING,
+        // allowNull defaults to true
+      },
     },
-  ],
-});
-let Medias = mongoose.model("Medias", mediasSchema);
-let Banners = mongoose.model("Banners", bannersSchema);
-let Store = mongoose.model("Store", StoreSchema);
-let Manager = mongoose.model("Manager", managerSchema);
-let Partner = mongoose.model("Partner", PartnerSchema);
-let News = mongoose.model("News", newsSchema);
-let Client = mongoose.model("Client", clientSchema);
+    {
+      // Other model options go here
+    }
+  );
+  const Banner = sequelize.define(
+    "Banner",
+    {
+      // Model attributes are defined here
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      img: {
+        type: DataTypes.STRING,
+        // allowNull defaults to true
+      },
+    },
+    {
+      // Other model options go here
+    }
+  );
+  const News = sequelize.define(
+    "News",
+    {
+      // Model attributes are defined here
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      descript: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      content: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      img: {
+        type: DataTypes.STRING,
+        // allowNull defaults to true
+      },
+      newsType: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      personPostID: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+    },
+    {
+      // Other model options go here
+    }
+  );
+  const Media = sequelize.define(
+    "Media",
+    {
+      // Model attributes are defined here
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      urlVideo: {
+        type: DataTypes.STRING,
+        // allowNull defaults to true
+      },
+      personPostID: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+    },
+    {
+      // Other model options go here
+    }
+  );
+  const Manager = sequelize.define(
+    "Manager",
+    {
+      // Model attributes are defined here
+      account: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      phone: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      dateOfBirth: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      address: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
 
-module.exports = { Store, Manager, Partner, News, Client, Banners, Medias };
+      admin: {
+        type: DataTypes.BOOLEAN,
+        // allowNull defaults to true
+      },
+      newsID: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      mediaID: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+    },
+    {
+      // Other model options go here
+    }
+  );
+  const Client = sequelize.define(
+    "Client",
+    {
+      // Model attributes are defined here
+
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      phone: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      address: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      loanType: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
+      isLoan: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
+      storeID: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+    },
+    {
+      // Other model options go here
+    }
+  );
+  const Store = sequelize.define(
+    "Store",
+    {
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      phone: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      addressID: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+
+      idMap: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      clientID: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+    },
+    {
+      // Other model options go here
+    }
+  );
+  const Address = sequelize.define(
+    "Address",
+    {
+      Street: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      district: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      province: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+    },
+    {
+      // Other model options go here
+    }
+  );
+};
